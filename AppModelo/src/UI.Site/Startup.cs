@@ -10,6 +10,7 @@ using Microsoft.AspNetCore.Mvc.Razor;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using UI.Site.Data;
+using UI.Site.Services;
 
 namespace UI.Site
 {
@@ -29,6 +30,13 @@ namespace UI.Site
 			services.AddMvc(option => option.EnableEndpointRouting = false).SetCompatibilityVersion(CompatibilityVersion.Version_3_0);
 
 			services.AddTransient<IPedidoRespository, PedidoRepository>();
+
+			services.AddTransient<IOperacaoTransient, Operacao>();
+			services.AddScoped<IOperacaoScoped, Operacao>();
+			services.AddSingleton<IOperacaoSingleton, Operacao>();
+			services.AddSingleton<IOperacaoSingletonInstance>( new Operacao(id: Guid.Empty));
+			 
+			services.AddTransient<OperacaoService>();
 		}
 
 		// This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
