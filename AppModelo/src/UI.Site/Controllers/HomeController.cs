@@ -9,15 +9,15 @@ namespace UI.Site.Controllers
 {
     public class HomeController : Controller
     {
-		private readonly IPedidoRespository _pedidoRepository;
+		//private readonly IPedidoRespository _pedidoRespository;
 
-		public HomeController(IPedidoRespository pedidoRepository)
-		{
-			_pedidoRepository = pedidoRepository;
-		}
-        public IActionResult Index()
+		//public HomeController(IPedidoRespository pedidoRepository)
+		//{
+		//	_pedidoRepository = pedidoRepository;
+		//}
+		public IActionResult Index([FromServices] IPedidoRespository _pedidoRespository )
         {
-			var pedido = _pedidoRepository.ObeterPedido();
+			var pedido = _pedidoRespository.ObeterPedido();
 
 			return View(pedido);
         }
