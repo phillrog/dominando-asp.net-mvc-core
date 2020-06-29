@@ -7,6 +7,8 @@ using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Razor;
+using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using UI.Site.Data;
@@ -18,6 +20,14 @@ namespace UI.Site
 	{
 		// This method gets called by the runtime. Use this method to add services to the container.
 		// For more information on how to configure your application, visit https://go.microsoft.com/fwlink/?LinkID=398940
+
+		public IConfiguration Configuration { get; }
+
+		public Startup(IConfiguration configuration)
+		{
+			Configuration = configuration;
+		}
+
 		public void ConfigureServices(IServiceCollection services)
 		{
 			services.Configure<RazorViewEngineOptions>(options => {
@@ -37,6 +47,8 @@ namespace UI.Site
 			services.AddSingleton<IOperacaoSingletonInstance>( new Operacao(id: Guid.Empty));
 			 
 			services.AddTransient<OperacaoService>();
+
+			services.AddDbContext<MeuDbContext>(options => options.UseSqlServer(Configuration.GetConnectionString("MeuDbContext")));
 		}
 
 		// This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
