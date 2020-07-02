@@ -1,0 +1,25 @@
+version: '3.4'
+
+services:
+
+    api:
+        image: app-modelo
+        build:
+            context: .
+            dockerfile: Dockerfile      
+        ports:
+            - '5001:80'
+        networks:
+            - meuapp-net
+
+    db:
+        image: "mcr.microsoft.com/mssql/server"
+        environment:
+            SA_PASSWORD: "1234"
+            ACCEPT_EULA: "Y"
+        networks:
+          - meuapp-net
+
+networks:
+    meuapp-net:
+        driver: bridge 

@@ -3,6 +3,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using UI.Site.Models;
 
 namespace UI.Site.Data
 {
@@ -13,5 +14,7 @@ namespace UI.Site.Data
 		{
 
 		}
+
+		public DbSet<Aluno> Alunos { get; set; }
 	}
 }
