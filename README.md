@@ -15,3 +15,4 @@ Curso Asp .Net MVC Core do desenvolvedor.io
 - Foi aprendido a customizar a autenticação
 - Foi aprendido a redirecionar para uma area caso usuário não autorizado
 - Foi aprendido a configurar permissão para elementos Html da razor page
+- Foi aprendido a configurar a aplicação para vários ambientes

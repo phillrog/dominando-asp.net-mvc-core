@@ -3,23 +3,26 @@ using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
-using AspNetCoreIdentity.Areas.Identity.Data;
-using Microsoft.AspNetCore.Identity;
-using Microsoft.EntityFrameworkCore;
-using AspNetCoreIdentity.Extensions;
-using Microsoft.AspNetCore.Authorization;
 using AspNetCoreIdentity.Config;
 
 namespace AspNetCoreIdentity
 {
 	public class Startup
 	{
-		public Startup(IConfiguration configuration)
+		public IConfiguration Configuration { get; }
+
+		public Startup(Microsoft.Extensions.Hosting.IHostingEnvironment hostingEnvironment)
 		{
-			Configuration = configuration;
+			var builder = new ConfigurationBuilder()
+				.SetBasePath(hostingEnvironment.ContentRootPath)
+				.AddJsonFile("appsettings.json", true,true)
+				.AddJsonFile($"appsettings.{hostingEnvironment.EnvironmentName}.json", true, true)
+				.AddEnvironmentVariables();
+
+			Configuration = builder.Build();
+				
 		}
 
-		public IConfiguration Configuration { get; }
 
 		// This method gets called by the runtime. Use this method to add services to the container.
 		public void ConfigureServices(IServiceCollection services)
