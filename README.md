@@ -9,3 +9,7 @@ Curso Asp .Net MVC Core do desenvolvedor.io
 - Foi entendido e aplicado o conceito de injeção de dependencia
 - Foi aprendido a utilizar a injeção de dependencia dentro de uma view
 - Foi aprendido a utilizar a injeção de dependencia através do atributo FromServices
+- Foi aprendido a trabalhar com Identity e seu case
+- Foi aprendido a configurar Role, Claims
+- Foi aprendido a trabalhar com Claims em vários niveis
+- Foi aprendido a customizar a autenticação

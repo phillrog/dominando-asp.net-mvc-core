@@ -6,6 +6,8 @@ using Microsoft.Extensions.Hosting;
 using AspNetCoreIdentity.Areas.Identity.Data;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
+using AspNetCoreIdentity.Extensions;
+using Microsoft.AspNetCore.Authorization;
 
 namespace AspNetCoreIdentity
 {
@@ -30,6 +32,16 @@ namespace AspNetCoreIdentity
 				.AddRoles<IdentityRole>()
 				.AddDefaultUI()
 				.AddEntityFrameworkStores<AspNetCoreIdentityContext>();
+
+			services.AddAuthorization(options =>
+			{
+				options.AddPolicy(name: "PodeExcluir", configurePolicy: policy => policy.RequireClaim("PodeExcluir"));
+
+				options.AddPolicy(name: "PodeLer", configurePolicy: policy => policy.Requirements.Add(new PermissaoNecessaria("PodeLer")));
+				options.AddPolicy(name: "PodeEscrever", configurePolicy: policy => policy.Requirements.Add(new PermissaoNecessaria("PodeEscrever")));
+			});
+
+			services.AddSingleton<IAuthorizationHandler, PermissaoNecessariaHandler>();
 
 			services.AddControllersWithViews();
 		}
