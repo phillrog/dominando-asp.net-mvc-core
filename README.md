@@ -16,3 +16,4 @@ Curso Asp .Net MVC Core do desenvolvedor.io
 - Foi aprendido a redirecionar para uma area caso usuário não autorizado
 - Foi aprendido a configurar permissão para elementos Html da razor page
 - Foi aprendido a configurar a aplicação para vários ambientes
+- Foi aprendido a trabalhar com o [KissLog Net](https://kisslog.net/) para efetuar log da aplicação

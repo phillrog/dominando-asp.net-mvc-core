@@ -19,7 +19,7 @@ namespace AspNetCoreIdentity.Extensions
 	{
 		protected override Task HandleRequirementAsync(AuthorizationHandlerContext context, PermissaoNecessaria requirement)
 		{
-			if (context.User.HasClaim(c => c.Type == "Permissao" && c.Value.Contains(requirement.Permissao)){
+			if (context.User.HasClaim(c => c.Type == "Permissao" && c.Value.Contains(requirement.Permissao))){
 				context.Succeed(requirement);
 			}
 
