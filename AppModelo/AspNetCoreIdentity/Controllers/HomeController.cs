@@ -7,6 +7,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 using AspNetCoreIdentity.Models;
 using Microsoft.AspNetCore.Authorization;
+using AspNetCoreIdentity.Extensions;
 
 namespace AspNetCoreIdentity.Controllers
 {
@@ -46,6 +47,13 @@ namespace AspNetCoreIdentity.Controllers
 
 		[Authorize(Policy = "PodeEscrever")]
 		public IActionResult SecretClaimGravar()
+		{
+			return View("Secret");
+		}
+
+
+		[ClaimsAuthorize("Produtos", "Ler")]
+		public IActionResult ClaimCustom()
 		{
 			return View("Secret");
 		}
