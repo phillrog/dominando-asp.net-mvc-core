@@ -8,6 +8,7 @@ using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using AspNetCoreIdentity.Extensions;
 using Microsoft.AspNetCore.Authorization;
+using AspNetCoreIdentity.Config;
 
 namespace AspNetCoreIdentity
 {
@@ -23,25 +24,9 @@ namespace AspNetCoreIdentity
 		// This method gets called by the runtime. Use this method to add services to the container.
 		public void ConfigureServices(IServiceCollection services)
 		{
-
-			services.AddDbContext<AspNetCoreIdentityContext>(options =>
-					options.UseSqlServer(
-						Configuration.GetConnectionString("AspNetCoreIdentityContextConnection")));
-
-			services.AddDefaultIdentity<IdentityUser>()
-				.AddRoles<IdentityRole>()
-				.AddDefaultUI()
-				.AddEntityFrameworkStores<AspNetCoreIdentityContext>();
-
-			services.AddAuthorization(options =>
-			{
-				options.AddPolicy(name: "PodeExcluir", configurePolicy: policy => policy.RequireClaim("PodeExcluir"));
-
-				options.AddPolicy(name: "PodeLer", configurePolicy: policy => policy.Requirements.Add(new PermissaoNecessaria("PodeLer")));
-				options.AddPolicy(name: "PodeEscrever", configurePolicy: policy => policy.Requirements.Add(new PermissaoNecessaria("PodeEscrever")));
-			});
-
-			services.AddSingleton<IAuthorizationHandler, PermissaoNecessariaHandler>();
+			services.AddIdentityCOnfig(Configuration);
+			services.AddAutohrizationConfig();
+			services.ResolveDepencencies();
 
 			services.AddControllersWithViews();
 		}
