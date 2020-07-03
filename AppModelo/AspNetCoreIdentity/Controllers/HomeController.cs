@@ -6,9 +6,11 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 using AspNetCoreIdentity.Models;
+using Microsoft.AspNetCore.Authorization;
 
 namespace AspNetCoreIdentity.Controllers
 {
+	[Authorize]
 	public class HomeController : Controller
 	{
 		private readonly ILogger<HomeController> _logger;
@@ -18,11 +20,13 @@ namespace AspNetCoreIdentity.Controllers
 			_logger = logger;
 		}
 
+		[AllowAnonymous]
 		public IActionResult Index()
 		{
 			return View();
 		}
 
+		//[Authorize]
 		public IActionResult Privacy()
 		{
 			return View();
