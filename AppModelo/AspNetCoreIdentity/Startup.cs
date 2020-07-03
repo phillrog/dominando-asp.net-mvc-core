@@ -27,6 +27,7 @@ namespace AspNetCoreIdentity
 						Configuration.GetConnectionString("AspNetCoreIdentityContextConnection")));
 
 			services.AddDefaultIdentity<IdentityUser>()
+				.AddRoles<IdentityRole>()
 				.AddDefaultUI()
 				.AddEntityFrameworkStores<AspNetCoreIdentityContext>();
 
