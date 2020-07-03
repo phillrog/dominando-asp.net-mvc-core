@@ -9,3 +9,5 @@
 /AppModelo/src/UI.Site/obj
 /AppModelo/.vs/AppModelo/DesignTimeBuild
 /AppModelo/src/UI.Site/bin/Release/netcoreapp3.0
+/AppModelo/AspNetCoreIdentity/bin/Debug/netcoreapp3.0
+/AppModelo/AspNetCoreIdentity/obj
