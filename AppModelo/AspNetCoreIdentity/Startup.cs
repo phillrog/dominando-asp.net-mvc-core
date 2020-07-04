@@ -11,6 +11,7 @@ using Microsoft.AspNetCore.Http;
 using System;
 using System.Text;
 using System.Diagnostics;
+using AspNetCoreIdentity.Extensions;
 
 namespace AspNetCoreIdentity
 {
@@ -22,16 +23,17 @@ namespace AspNetCoreIdentity
 		{
 			var builder = new ConfigurationBuilder()
 				.SetBasePath(hostingEnvironment.ContentRootPath)
-				.AddJsonFile("appsettings.json", true,true)
+				.AddJsonFile("appsettings.json", true, true)
 				.AddJsonFile($"appsettings.{hostingEnvironment.EnvironmentName}.json", true, true)
 				.AddEnvironmentVariables();
 
-			if (hostingEnvironment.IsProduction()) {
+			if (hostingEnvironment.IsProduction())
+			{
 				builder.AddUserSecrets<Startup>();
 			}
 
 			Configuration = builder.Build();
-				
+
 		}
 
 
@@ -47,7 +49,12 @@ namespace AspNetCoreIdentity
 			services.AddIdentityCOnfig(Configuration);
 			services.AddAutohrizationConfig();
 			services.ResolveDepencencies();
+			services.AddScoped<AuditoriaFilter>();
 
+			services.AddMvc(options =>
+			{
+				options.Filters.Add(typeof(AuditoriaFilter));
+			});
 			services.AddControllersWithViews();
 		}
 
@@ -73,7 +80,8 @@ namespace AspNetCoreIdentity
 			app.UseAuthorization();
 
 			// app.UseKissLogMiddleware() must to be referenced after app.UseAuthentication(), app.UseSession()
-			app.UseKissLogMiddleware(options => {
+			app.UseKissLogMiddleware(options =>
+			{
 				ConfigureKissLog(options);
 			});
 
